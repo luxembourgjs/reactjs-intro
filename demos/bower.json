@@ -1,0 +1,24 @@
+{
+  "name": "reactjs-demos",
+  "version": "0.0.0",
+  "authors": [
+    "littleiffel <thierry@eevol.lu>"
+  ],
+  "keywords": [
+    "reactjs"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.11",
+    "react": "~0.12.2",
+    "foundation": "~5.5.1"
+  }
+}

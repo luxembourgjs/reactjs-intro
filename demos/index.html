@@ -1,0 +1,203 @@
+<!doctype html>
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="bower_components/foundation/css/foundation.css"/>
+  <script src="bower_components/modernizr/modernizr.js"></script>
+</head>
+<body>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <h1>Feed Template</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div id="application" class="large-6 large-offset-3 columns">
+    <div class="row">
+      <form>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Comment
+              <textarea placeholder=""></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <div class="row collapse">
+              <div class="small-10 columns">
+                <input type="text" placeholder="Your Email">
+              </div>
+              <div class="small-2 columns">
+                <a href="#" class="button postfix">Post</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+      <div class="large-10 columns">
+        <p><strong>email@email.com said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod
+          commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+      <div class="large-10 columns">
+        <p><strong>email@email.com said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod
+          commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+
+      </div>
+    </div>
+
+    <hr/>
+
+  </div>
+
+</div>
+
+<footer class="row">
+  <div class="large-12 columns">
+
+    <div class="row">
+      <div class="large-5 columns">
+        <p>&copy; Copyright no one at all. Go to town.</p>
+      </div>
+      <div class="large-7 columns">
+        JSLuxembourg
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/foundation/js/foundation.js"></script>
+<script src="build/react.js"></script>
+<script src="build/JSXTransformer.js"></script>
+<script>
+  $(document).foundation();
+  var doc = document.documentElement;
+  doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
+<script type="text/jsx">
+  var data = [
+    {
+      time: 1420111952899,
+      twitter: 'littleiffel',
+      text: "Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong."
+    },
+    {
+      time: 1422814952899,
+      twitter: 'eevol_lu',
+      text: "Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong."
+    },
+    {
+      time: 1322814952899,
+      twitter: 'JSLuxembourg',
+      text: "No words."
+    }
+  ];
+
+  var CommentApp = React.createClass({
+    render: function () {
+      return (
+        <div>
+          <CommentList comments={this.props.comments} />
+          <CommentForm />
+        </div>
+      );
+    }
+  });
+
+  var CommentForm = React.createClass({
+    render: function () {
+      return (
+        <form>
+          <div className="row">
+            <div className="large-12 columns">
+              <label>Comment
+                <textarea placeholder=""></textarea>
+              </label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="large-12 columns">
+              <div className="row collapse">
+                <div className="small-10 columns">
+                  <input type="text" placeholder="Your Twitter"/>
+                </div>
+                <div className="small-2 columns">
+                  <a href="#" className='button postfix'>Post</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      )
+    }
+  });
+
+  var CommentList = React.createClass({
+    render: function () {
+      var list = [];
+      this.props.comments.forEach(function (comment) {
+        list.push(<CommentEntry key={comment.time} time={comment.time} text={comment.text} twitterhandler={comment.twitter} />);
+      });
+      return (
+        <div>{list}</div>
+      );
+    }
+  });
+
+  var CommentEntry = React.createClass({
+    render: function () {
+      var date = new Date(this.props.time).toString()
+      return (
+        <div className="row">
+          <div className="large-2 columns small-3">
+            <TwitterAvatar twitterhandler={this.props.twitterhandler}/>
+          </div>
+          <div className="large-10 columns">
+            <CommentText twitterhandler={this.props.twitterhandler} date={this.props.date} text={this.props.text}/>
+            <small>posted on {date}</small>
+          </div>
+          <hr/>
+        </div>
+      )
+    }
+  })
+
+  var CommentText = React.createClass({
+    render: function () {
+      var linkURL = "http://twitter.com/" + this.props.twitterhandler
+      return (<p>
+        <strong><a href={linkURL}>{this.props.twitterhandler}</a> said: </strong> {this.props.text}</p>)
+    }
+  });
+  var EmailGravatar = React.createClass({
+    render: function () {
+      return (<img src={"http://avatars.io/email/" + this.props.email}/>)
+    }
+  });
+  var TwitterAvatar = React.createClass({
+    render: function () {
+      return (<img src={"http://avatars.io/twitter/" + this.props.twitterhandler}/>)
+    }
+  });
+
+  React.render(<CommentApp comments={data} />, document.getElementById('application'));
+</script>
+</body>
+</html>

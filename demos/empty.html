@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="bower_components/foundation/css/foundation.css"/>
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/foundation/js/foundation.js"></script>
+  <script src="build/react.js"></script>
+  <script src="build/JSXTransformer.js"></script>
+
+  <script type="text/jsx">
+    var Timer = React.createClass({
+      getInitialState: function() {
+        return {secondsElapsed: this.props.init};
+      },
+      tick: function() {
+        this.setState({secondsElapsed: this.state.secondsElapsed + '.'});
+      },
+      componentDidMount: function() {
+        this.interval = setInterval(this.tick, 500);
+      },
+      componentWillUnmount: function() {
+        clearInterval(this.interval);
+      },
+      render: function() {
+        return (
+          <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
+        );
+      }
+    });
+
+    React.render(<Timer init="100"/>, document.body);
+  </script>
+</head>
+<body>
+
+</body>
+</html>
