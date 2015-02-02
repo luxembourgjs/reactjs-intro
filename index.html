@@ -72,7 +72,7 @@
           <a href="http://williambrownstreet.net">My blog</a>
         </li>
         <li>
-          <a href="http://eevol.lu">Eevol</a> <br>
+          <a href="http://eevol.lu">My company</a> <br>
           <small>Web-, iOS- and Android-Applications <i>(All Native)</i></small>
         </li>
       </ul>
@@ -91,13 +91,10 @@
           Goal of ReactJS
         </li>
         <li>
-
-        </li>
-        <li>
           Getting Started with ReactJS
         </li>
         <li>
-          Speed up rendering in AnuglarJS with ReactJS
+          Demo with Live coding
         </li>
       </ol>
 
@@ -106,12 +103,12 @@
     <section>
       <h2>ReactJS</h2>
       <ul>
-        <li>javascript library for building user interfaces</li>
-        <li>by <a href="facebook.com">facebook.com</a></li>
+        <li>Javascript library for building user interfaces</li>
+        <li>By <a href="facebook.com">facebook.com</a></li>
         <li>Initial Release ~ 2013</li>
         <li>Current stable: v0.12.2</li>
         <li>128kb</li>
-        <li>Used in Production by yahoo.com, instagram, facebook, Khan Academy, Netflix, Airbnb, Atlassian,...</li>
+        <li>Used in Production by yahoo, instagram, facebook, Khan Academy, Netflix, Airbnb, Atlassian,...</li>
       </ul>
     </section>
 
@@ -124,9 +121,10 @@
     <section>
       <h2>Why ReactJS might be interesting for you</h2>
       <ul>
-        <li>ReactJS is not an MVC Framework, ReactJS is simply the V</li>
+        <li>ReactJS is not another MVC Framework, ReactJS is simply the V</li>
         <li>Virtual DOM</li>
         <li>One-way reactive Data flow</li>
+        <li>Build Web-Apps using <a href="https://facebook.github.io/flux/">FLUX</a></li>
         <li><i>?Native ReactJS for iOS?</i></li>
       </ul>
     </section>
@@ -145,7 +143,7 @@
       <section>
         <h2>Components</h2>
         <ul>
-          <li>a Component should ideally only do one thing</li>
+          <li>A Component should ideally only do one thing</li>
           <li>Components instead of Templates (NO HTML directives)</li>
           <li>JSX<br><small>XML-LIKE SYNTAX EXTENSION TO ECMASCRIPT</small></li>
           <li>Components have a state (of properties)</li>
@@ -196,24 +194,24 @@
     </section>
 
     <section>
-      <h2>Thinking in ReactJS</h2>
-      <ol>
-        <li>break the UI into a component hierarchy</li>
-        <li>build a static version in React (no interactivity but renders data)</li>
-        <li>Identify the minimal representation of UI state, </li>
-        <li>Identify where your state should live</li>
-        <li>Add inverse data flow</li>
-      </ol>
+      <h2>ReactJS - Data flow</h2>
+      <blockquote cite="http://facebook.github.io/react/">
+        React implements one-way reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.
+      </blockquote>
+      <p>
+        from <a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a>
+      </p>
     </section>
 
     <section>
-      <h2>TO EXPLAIN</h2>
-      <ul>
-        <li>Installation: bower install react</li>
-        <li>Coding Components</li>
-        <li>State vs props</li>
-        <li>Forms</li>
-      </ul>
+      <h2>Thinking in ReactJS</h2>
+      <ol>
+        <li>Break the UI into a component hierarchy</li>
+        <li>Build a static version in React (no interactivity but renders data)</li>
+        <li>Identify the minimal representation of UI state, </li>
+        <li>Identify where your state should live</li>
+        <li>Add inverse data flow (input -> state)</li>
+      </ol>
     </section>
 
     <section>
@@ -226,34 +224,34 @@
         });
 
         // Attach Component to DOM Node
-        React.render(<HelloWorld name='John' />, document.body);
+        React.render(&lt;HelloWorld name='John' /&gt;, document.body);
       </code></pre>
     </section>
 
     <section>
       <h2>Stateful Component</h2>
       <pre><code data-trim contenteditable class="hljs js">
-        var Timer = React.createClass({
-          getInitialState: function() {
-            return {secondsElapsed: this.props.init};
-          },
-          tick: function() {
-            this.setState({secondsElapsed: this.state.secondsElapsed + 1});
-          },
-          componentDidMount: function() {
-            this.interval = setInterval(this.tick, 1000);
-          },
-          componentWillUnmount: function() {
-            clearInterval(this.interval);
-          },
-          render: function() {
-            return (
-            <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
-            );
-          }
-        });
+var Timer = React.createClass({
+  getInitialState: function() {
+    return {secondsElapsed: this.props.init};
+  },
+  tick: function() {
+    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+  },
+  componentDidMount: function() {
+    this.interval = setInterval(this.tick, 1000);
+  },
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
+  },
+  render: function() {
+    return (
+    <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
+    );
+  }
+});
 
-        React.render(<Timer init="100"/>, document.body);
+React.render(&lt;Timer init="100"/&gt;, document.body);
       </code></pre>
     </section>
 
@@ -266,30 +264,30 @@
         </ul>
       </section>
       <section>
-        <h2>Controller Forms</h2>
+        <h2>Controlled Forms</h2>
         <pre><code data-trim contenteditable class="hljs js">
-        var Form = React.createClass({
-          getInitialState: function() {
-            return {value: 'Hello!'};
-          },
-          handleChange: function(event) {
-            this.setState({value: event.target.value});
-          },
-          render: function() {
-            var value = this.state.value;
-            return <input type="text" value={value} onChange={this.handleChange} />;
-          }
-        })
+var Form = React.createClass({
+  getInitialState: function() {
+    return {value: 'Hello!'};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+  },
+  render: function() {
+    var value = this.state.value;
+    return <input type="text" value={value} onChange={this.handleChange} />;
+  }
+})
         </code></pre>
       </section>
       <section>
-        <h2>Controller Forms</h2>
+        <h2>Uncontrolled Forms</h2>
         <pre><code data-trim contenteditable class="hljs js">
-          var Form = React.createClass({
-            render: function() {
-              return <input type="text" defaultValue="Hello!" ref="myfield"/>;
-            }
-          })
+var Form = React.createClass({
+  render: function() {
+    return <input type="text" defaultValue="Hello!" ref="myfield"/>;
+  }
+})
         </code></pre>
         <p>
           Access via <i>this.refs.myfield.getDOMNode().value</i>
@@ -298,15 +296,54 @@
     </section>
 
     <section>
+      <h2>Lets code</h2>
+      <ul>
+        <li>Installation: bower install react<br>
+          <small>Bower? Install bower: npm install bower<br>
+            NPM?</small></li>
+      </ul>
+      <pre><code data-trim contenteditable class="hljs html">
+        &lt;html&gt;
+        &lt;head&gt;
+        &lt;script src="build/react.js"&gt;&lt;/script&gt;
+        &lt;script src="build/JSXTransformer.js"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+        &lt;div id="example"&gt;&lt;/div&gt;
+        &lt;script type="text/jsx"&gt;
+        var HelloMessage = React.createClass({
+        render: function() {
+        return <div>Hello {this.props.name}</div>;
+        }
+        });
+        React.render(&lt;HelloMessage name="John" /&gt;, document.getElementById('example'));
+
+        &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+      </code></pre>
+    </section>
+
+    <section>
       <h1>Demo</h1>
+    </section>
+
+    <section>
+      <h2>FLUX</h2>
+      <blockquote cite="http://facebook.github.io/flux/">
+        </p>Flux is the application architecture that Facebook uses for building client-side web applications. It complements React's composable view components by utilizing a unidirectional data flow. It's more of a pattern rather than a formal framework
+      </blockquote>
+      <p>
+        from <a href="http://facebook.github.io/flux/">http://facebook.github.io/flux/</a>
+
     </section>
 
     <section>
       <h2>More</h2>
       <ul>
-        <li>FLUX <a href="http://facebook.github.io/react/blog/2014/05/06/flux.html">http://facebook.github.io/react/blog/2014/05/06/flux.html</a></li>
-
         <li><a href="http://facebook.github.io/react/docs/test-utils.html">Testing ReactJS</a></li>
+        <li>Pre Compile JSX offline <a href="http://facebook.github.io/react/docs/getting-started.html#offline-transform">Offline Transform</a></li>
+        <li>Two-Way Binding Helper <a href="http://facebook.github.io/react/docs/two-way-binding-helpers.html">ReactLink</a></li>
       </ul>
     </section>
 
