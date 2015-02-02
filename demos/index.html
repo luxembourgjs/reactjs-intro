@@ -1,203 +1,418 @@
 <!doctype html>
-<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="bower_components/foundation/css/foundation.css"/>
-  <script src="bower_components/modernizr/modernizr.js"></script>
+  <meta charset="utf-8">
+
+  <title>Introduction to ReactJS - for JSLuxembourg by Thierry Nicola</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+  <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700,900' rel='stylesheet'
+        type='text/css'>
+
+  <style>
+    h2 {
+      font-family: 'Source Code Pro', Arial;
+    }
+  </style>
+
+
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
 </head>
+
 <body>
 
-<div class="row">
-  <div class="large-12 columns">
-    <div class="panel">
-      <h1>Feed Template</h1>
-    </div>
+<div class="reveal">
+
+  <!-- Any section element inside of this container is displayed as a slide -->
+  <div class="slides">
+    <section>
+      <h1>React.jS</h1>
+
+      <h3>Building User Interfaces</h3>
+
+      <p>
+        <small>for <a href="twitter.com/jsLuxembourg">@JSLuxembourg</a> by <a href="http://williambrownstreet.net">Thierry
+          Nicola</a> / <a href="http://twitter.com/littleiffel">@littleiffel</a>, Feb.2015
+        </small>
+      </p>
+    </section>
+
+    <section>
+      <h2>About me</h2>
+      <ul>
+        <li>
+          Thierry Nicola
+        </li>
+        <li>
+          <a href="http://williambrownstreet.net">My blog</a>
+        </li>
+        <li>
+          <a href="http://eevol.lu">My company</a> <br>
+          <small>Web-, iOS- and Android-Applications <i>(All Native)</i></small>
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- Example of nested vertical slides -->
+    <section>
+
+      <h2>Agenda</h2>
+      <ol>
+        <li>
+          ReactJS
+        </li>
+        <li>
+          Goal of ReactJS
+        </li>
+        <li>
+          Getting Started with ReactJS
+        </li>
+        <li>
+          Demo with Live coding
+        </li>
+      </ol>
+
+    </section>
+
+    <section>
+      <h2>ReactJS</h2>
+      <ul>
+        <li>Javascript library for building user interfaces</li>
+        <li>By <a href="facebook.com">facebook.com</a></li>
+        <li>Initial Release ~ 2013</li>
+        <li>Current stable: v0.12.2</li>
+        <li>128kb</li>
+        <li>Used in Production by yahoo, instagram, facebook, Khan Academy, Netflix, Airbnb, Atlassian,...</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Goal of ReactJs</h2>
+      <p>
+        Address common challenges in Single-Page Web Applications with data that changes over time
+      </p>
+    </section>
+    <section>
+      <h2>Why ReactJS might be interesting for you</h2>
+      <ul>
+        <li>ReactJS is not another MVC Framework, ReactJS is simply the V</li>
+        <li>Virtual DOM</li>
+        <li>One-way reactive Data flow</li>
+        <li>Build Web-Apps using <a href="https://facebook.github.io/flux/">FLUX</a></li>
+        <li><i>?Native ReactJS for iOS?</i></li>
+      </ul>
+    </section>
+
+    <section>
+      <section>
+        <h2>ReactJS - Just the UI</h2>
+        <blockquote cite="http://facebook.github.io/react/">
+          &ldquo;Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your
+          technology stack, it's easy to try it out on a small feature in an existing project.&rdquo;
+        </blockquote>
+        <p>
+          from <a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a>
+        </p>
+      </section>
+      <section>
+        <h2>Components</h2>
+        <ul>
+          <li>A Component should ideally only do one thing</li>
+          <li>Components instead of Templates (NO HTML directives)</li>
+          <li>JSX<br><small>XML-LIKE SYNTAX EXTENSION TO ECMASCRIPT</small></li>
+          <li>Components have a state (of properties)</li>
+          <li>Components are organized in a hierarchy</li>
+        </ul>
+        <h4>An Example Component</h4>
+        <pre><code data-trim class="hljs js">
+          var HelloMessage = React.createClass({
+            render: function() {
+              return <div>Hello {this.props.name}</div>;
+            }
+          });
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h2>ReactJS - Virtual DOM</h2>
+        <blockquote cite="http://facebook.github.io/react/">
+          React uses a virtual DOM diff implementation for ultra-high performance. It can also render on the server using
+          Node.js — no heavy browser DOM required.
+        </blockquote>
+        <p>
+          from <a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a>
+        </p>
+      </section>
+      <section>
+        <h2>How ReactJS updates the DOM (Virtual DOM)</h2>
+        <ul>
+          <li>Axiom: "DOM manipulation is expensive"</li>
+          <ol>
+            <li>
+              Component.render generates in memory representation of the its view
+            </li>
+            <li>
+              From that representation a markup string is generated and injected into the document
+            </li>
+            <li>
+              On Data changes, <emph>Component.render</emph> is called again and a diff from current view to the new is made and a minimal set of required DOM changes is generated
+            </li>
+            <li>
+              Example: <a href="http://jsfiddle.net/fv6RD/3/">http://jsfiddle.net/fv6RD/3/</a>
+            </li>
+          </ol>
+        </ul>
+      </section>
+    </section>
+
+    <section>
+      <h2>ReactJS - Data flow</h2>
+      <blockquote cite="http://facebook.github.io/react/">
+        React implements one-way reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.
+      </blockquote>
+      <p>
+        from <a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>Thinking in ReactJS</h2>
+      <ol>
+        <li>Break the UI into a component hierarchy</li>
+        <li>Build a static version in React (no interactivity but renders data)</li>
+        <li>Identify the minimal representation of UI state, </li>
+        <li>Identify where your state should live</li>
+        <li>Add inverse data flow (input -> state)</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Coding a your first Component</h2>
+      <pre><code data-trim class="hljs js">
+        var HelloMessage = React.createClass({
+          render: function() {
+            return <div className="alert">Hello {this.props.name}</div>;
+          }
+        });
+
+        // Attach Component to DOM Node
+        React.render(&lt;HelloWorld name='John' /&gt;, document.body);
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>Stateful Component</h2>
+      <pre><code data-trim contenteditable class="hljs js">
+var Timer = React.createClass({
+  getInitialState: function() {
+    return {secondsElapsed: this.props.init};
+  },
+  tick: function() {
+    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+  },
+  componentDidMount: function() {
+    this.interval = setInterval(this.tick, 1000);
+  },
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
+  },
+  render: function() {
+    return (
+    <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
+    );
+  }
+});
+
+React.render(&lt;Timer init="100"/&gt;, document.body);
+      </code></pre>
+    </section>
+
+    <section>
+      <section>
+        <h2>Forms</h2>
+        <ul>
+          <li>Controlled Forms</li>
+          <li>Uncontrolled Forms</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Controlled Forms</h2>
+        <pre><code data-trim contenteditable class="hljs js">
+var Form = React.createClass({
+  getInitialState: function() {
+    return {value: 'Hello!'};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+  },
+  render: function() {
+    var value = this.state.value;
+    return <input type="text" value={value} onChange={this.handleChange} />;
+  }
+})
+        </code></pre>
+      </section>
+      <section>
+        <h2>Uncontrolled Forms</h2>
+        <pre><code data-trim contenteditable class="hljs js">
+var Form = React.createClass({
+  render: function() {
+    return <input type="text" defaultValue="Hello!" ref="myfield"/>;
+  }
+})
+        </code></pre>
+        <p>
+          Access via <i>this.refs.myfield.getDOMNode().value</i>
+        </p>
+      </section>
+    </section>
+
+    <section>
+      <h2>Lets code</h2>
+      <ul>
+        <li>Installation: bower install react<br>
+          <small>Bower? Install bower: npm install bower<br>
+            NPM?</small></li>
+      </ul>
+      <pre><code data-trim contenteditable class="hljs html">
+        &lt;html&gt;
+        &lt;head&gt;
+        &lt;script src="build/react.js"&gt;&lt;/script&gt;
+        &lt;script src="build/JSXTransformer.js"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+        &lt;div id="example"&gt;&lt;/div&gt;
+        &lt;script type="text/jsx"&gt;
+        var HelloMessage = React.createClass({
+        render: function() {
+        return <div>Hello {this.props.name}</div>;
+        }
+        });
+        React.render(&lt;HelloMessage name="John" /&gt;, document.getElementById('example'));
+
+        &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+      </code></pre>
+    </section>
+
+    <section>
+      <h1>Demo</h1>
+    </section>
+
+    <section>
+      <h2>FLUX</h2>
+      <blockquote cite="http://facebook.github.io/flux/">
+        </p>Flux is the application architecture that Facebook uses for building client-side web applications. It complements React's composable view components by utilizing a unidirectional data flow. It's more of a pattern rather than a formal framework
+      </blockquote>
+      <p>
+        from <a href="http://facebook.github.io/flux/">http://facebook.github.io/flux/</a>
+
+    </section>
+
+    <section>
+      <h2>More</h2>
+      <ul>
+        <li><a href="http://facebook.github.io/react/docs/test-utils.html">Testing ReactJS</a></li>
+        <li>Pre Compile JSX offline <a href="http://facebook.github.io/react/docs/getting-started.html#offline-transform">Offline Transform</a></li>
+        <li>Two-Way Binding Helper <a href="http://facebook.github.io/react/docs/two-way-binding-helpers.html">ReactLink</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Resources</h2>
+      <ul>
+        <li>ReactJS Homepage <a href="http://facebook.github.io/react">http://facebook.github.io/react</a></li>
+        <li><a href="http://egghead.io">Egghead.io</a></li>
+        <li><a href="https://github.com/enaqx/awesome-react">Awesome React Resources</a></li>
+        <li><a href="http://gaearon.github.io/react-hot-loader/">ReactJS Hot Loader</a> </li>
+      </ul>
+    </section>
+
+    <section style="text-align: left;">
+      <h1>THE END</h1>
+      <p>
+        Thanks for your attention!
+      </p>
+    </section>
+
   </div>
+
 </div>
 
-<div class="row">
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-  <div id="application" class="large-6 large-offset-3 columns">
-    <div class="row">
-      <form>
-        <div class="row">
-          <div class="large-12 columns">
-            <label>Comment
-              <textarea placeholder=""></textarea>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="large-12 columns">
-            <div class="row collapse">
-              <div class="small-10 columns">
-                <input type="text" placeholder="Your Email">
-              </div>
-              <div class="small-2 columns">
-                <a href="#" class="button postfix">Post</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="row">
-      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
-      <div class="large-10 columns">
-        <p><strong>email@email.com said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod
-          commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
-      <div class="large-10 columns">
-        <p><strong>email@email.com said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod
-          commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-
-      </div>
-    </div>
-
-    <hr/>
-
-  </div>
-
-</div>
-
-<footer class="row">
-  <div class="large-12 columns">
-
-    <div class="row">
-      <div class="large-5 columns">
-        <p>&copy; Copyright no one at all. Go to town.</p>
-      </div>
-      <div class="large-7 columns">
-        JSLuxembourg
-      </div>
-    </div>
-  </div>
-</footer>
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/foundation/js/foundation.js"></script>
-<script src="build/react.js"></script>
-<script src="build/JSXTransformer.js"></script>
 <script>
-  $(document).foundation();
-  var doc = document.documentElement;
-  doc.setAttribute('data-useragent', navigator.userAgent);
+
+  // Full list of configuration options available at:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // Optional reveal.js plugins
+    dependencies: [
+      {
+        src: 'lib/js/classList.js', condition: function () {
+        return !document.body.classList;
+      }
+      },
+      {
+        src: 'plugin/markdown/marked.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      }
+      },
+      {
+        src: 'plugin/markdown/markdown.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      }
+      },
+      {
+        src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+        return !!document.querySelector('pre code');
+      }, callback: function () {
+        hljs.initHighlightingOnLoad();
+      }
+      },
+      {src: 'plugin/zoom-js/zoom.js', async: true},
+      {src: 'plugin/notes/notes.js', async: true}
+    ]
+  });
+
 </script>
-<script type="text/jsx">
-  var data = [
-    {
-      time: 1420111952899,
-      twitter: 'littleiffel',
-      text: "Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong."
-    },
-    {
-      time: 1422814952899,
-      twitter: 'eevol_lu',
-      text: "Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong."
-    },
-    {
-      time: 1322814952899,
-      twitter: 'JSLuxembourg',
-      text: "No words."
-    }
-  ];
 
-  var CommentApp = React.createClass({
-    render: function () {
-      return (
-        <div>
-          <CommentList comments={this.props.comments} />
-          <CommentForm />
-        </div>
-      );
-    }
-  });
-
-  var CommentForm = React.createClass({
-    render: function () {
-      return (
-        <form>
-          <div className="row">
-            <div className="large-12 columns">
-              <label>Comment
-                <textarea placeholder=""></textarea>
-              </label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="large-12 columns">
-              <div className="row collapse">
-                <div className="small-10 columns">
-                  <input type="text" placeholder="Your Twitter"/>
-                </div>
-                <div className="small-2 columns">
-                  <a href="#" className='button postfix'>Post</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      )
-    }
-  });
-
-  var CommentList = React.createClass({
-    render: function () {
-      var list = [];
-      this.props.comments.forEach(function (comment) {
-        list.push(<CommentEntry key={comment.time} time={comment.time} text={comment.text} twitterhandler={comment.twitter} />);
-      });
-      return (
-        <div>{list}</div>
-      );
-    }
-  });
-
-  var CommentEntry = React.createClass({
-    render: function () {
-      var date = new Date(this.props.time).toString()
-      return (
-        <div className="row">
-          <div className="large-2 columns small-3">
-            <TwitterAvatar twitterhandler={this.props.twitterhandler}/>
-          </div>
-          <div className="large-10 columns">
-            <CommentText twitterhandler={this.props.twitterhandler} date={this.props.date} text={this.props.text}/>
-            <small>posted on {date}</small>
-          </div>
-          <hr/>
-        </div>
-      )
-    }
-  })
-
-  var CommentText = React.createClass({
-    render: function () {
-      var linkURL = "http://twitter.com/" + this.props.twitterhandler
-      return (<p>
-        <strong><a href={linkURL}>{this.props.twitterhandler}</a> said: </strong> {this.props.text}</p>)
-    }
-  });
-  var EmailGravatar = React.createClass({
-    render: function () {
-      return (<img src={"http://avatars.io/email/" + this.props.email}/>)
-    }
-  });
-  var TwitterAvatar = React.createClass({
-    render: function () {
-      return (<img src={"http://avatars.io/twitter/" + this.props.twitterhandler}/>)
-    }
-  });
-
-  React.render(<CommentApp comments={data} />, document.getElementById('application'));
-</script>
 </body>
 </html>
